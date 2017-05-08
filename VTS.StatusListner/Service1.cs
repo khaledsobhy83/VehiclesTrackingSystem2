@@ -19,6 +19,7 @@ namespace VTS.StatusListner
 
         protected override void OnStart(string[] args)
         {
+            VehicleTCPListener.Start();
         }
 
         protected override void OnStop()
