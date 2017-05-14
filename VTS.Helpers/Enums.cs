@@ -9,7 +9,8 @@ namespace VTS.Helpers.Enums
     public enum VehicleStatusEnum
     {
         Online,
-        Offline
+        Offline,
+        Unknown
     }
 
 }

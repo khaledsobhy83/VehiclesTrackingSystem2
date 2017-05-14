@@ -1,6 +1,7 @@
 ﻿using VTS.BL;
 using Autofac;
 using VTS.DependencyInjectionRegister;
+using System.Text;
 
 namespace VTS.VehicleListener
 {
@@ -19,8 +20,9 @@ namespace VTS.VehicleListener
             _constainer = builder.Build();
         }
 
-        public void HandleResponse(string vehicleId)
+        public string HandleResponse(byte[] response, int responseSize)
         {
+            var vehicleId = Encoding.ASCII.GetString(response, 0, responseSize);
 
             using (var scope = _constainer.BeginLifetimeScope())
             {
@@ -28,6 +30,8 @@ namespace VTS.VehicleListener
             }
 
             _vehicleManager.UpdateVehicleStatus(vehicleId, Helpers.Enums.VehicleStatusEnum.Online);
+
+            return vehicleId;
         }
     }
 }

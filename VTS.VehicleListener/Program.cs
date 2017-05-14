@@ -11,10 +11,10 @@ namespace VTS.VehicleListener
     {
         static void Main(string[] args)
         {
-            //Dependency injection configuration
-           
-         
-            new VehicleTCPListener().Start();
+            var listener = new VehicleTCPListener();
+
+            listener.Start();
+
             Console.ReadKey();
         }
     }

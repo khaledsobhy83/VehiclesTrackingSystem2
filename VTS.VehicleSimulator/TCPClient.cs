@@ -26,7 +26,7 @@ namespace VTS.VehicleSimulator
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(_serverIp);
 
-            IPAddress ipAddress = ipHostInfo.AddressList[1];
+            IPAddress ipAddress = ipHostInfo.AddressList[2];
 
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, _port);
 

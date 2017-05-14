@@ -41,12 +41,12 @@ namespace VTS.Test
 
             Assert.AreEqual(vehiclesList.Count, 1);
 
-            Assert.AreEqual(vehiclesList[0].Vehicles.Count, 3);
+            Assert.AreEqual(vehiclesList[0].Vehicles.Count, 2);
         }
         [TestMethod]
         public void GetVehiclesByStatus_NoResults()
         {
-            var vehiclesList = vehiclesManager.GetVehiclesByStatus(Helpers.Enums.VehicleStatusEnum.Online);
+            var vehiclesList = vehiclesManager.GetVehiclesByStatus(Helpers.Enums.VehicleStatusEnum.Unknown);
 
             Assert.AreEqual(vehiclesList.Count, 0);
         }
@@ -70,10 +70,6 @@ namespace VTS.Test
             var result = vehiclesManager.UpdateVehicleStatus("xxxx0000", Helpers.Enums.VehicleStatusEnum.Online);
 
             Assert.AreEqual(result, false);
-
-            var vehiclesList = vehiclesManager.GetVehiclesByStatus(Helpers.Enums.VehicleStatusEnum.Online);
-
-            Assert.AreEqual(vehiclesList.Count, 0);
 
         }
     }

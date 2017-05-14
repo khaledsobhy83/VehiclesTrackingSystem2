@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VTS.Repository
+namespace VTS.VehicleListener
 {
-    interface IEntity
+    public interface IResponseHandler
     {
+        string HandleResponse(byte[] response, int responseSize);
     }
 }

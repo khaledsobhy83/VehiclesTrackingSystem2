@@ -41,8 +41,15 @@ namespace VTS.Repository
         {
             var statusString = Enum.GetName(status.GetType(), status);
 
-            var vehiclesList = VehicleSystemFileStore.CustomersVehicles.Where
-                (c => c.Vehicles.Exists(s=>s.VehicleStatus == statusString)).ToList();
+            var vehiclesList = VehicleSystemFileStore.CustomersVehicles.Where(v => v.Vehicles.Any(x => x.VehicleStatus == statusString)).
+                Select
+                (c => new CustomerStore
+                {
+                    CustomerAddress = c.CustomerAddress,
+                    ID = c.ID,
+                    CustomerName = c.CustomerName,
+                    Vehicles = c.Vehicles.Where(s => s.VehicleStatus == statusString).ToList()
+                }).ToList();
 
             return Mapper.Map<List<Customer>>(vehiclesList);
         }

@@ -5,8 +5,11 @@ using VTS.Entity;
 using VTS.Helpers;
 using VTS.Helpers.Enums;
 using VTS.DTO;
+using System.Web.Http.Cors;
+
 namespace VTS.WebAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:8415", headers: "*", methods: "*")]
     public class VehicleController : ApiController
     {
         private IVehiclesManager _vehiclesManager;
@@ -35,9 +38,9 @@ namespace VTS.WebAPI.Controllers
        
         // POST api/<controller>
         [HttpPost]
-        public bool UpdateMyStatus(VehicleStatus vehcleStatus)
+        public bool UpdateMyStatus(VehicleStatus vehicleStatus)
         {
-            return _vehiclesManager.UpdateVehicleStatus(vehcleStatus.vehicleId, (VehicleStatusEnum)vehcleStatus.status);
+            return _vehiclesManager.UpdateVehicleStatus(vehicleStatus.vehicleId, (VehicleStatusEnum)vehicleStatus.status);
         }
 
         // PUT api/<controller>/5

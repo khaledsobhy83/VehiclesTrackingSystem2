@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainRepositories\ICustomerRepository.cs" />
     <Compile Include="DomainRepositories\IVehicleRepository.cs" />
     <Compile Include="DomainRepositories\VehicleRepository.cs" />
     <Compile Include="FileRepository\FileRepository.cs" />
-    <Compile Include="IEntity.cs" />
     <Compile Include="GenericRepository\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

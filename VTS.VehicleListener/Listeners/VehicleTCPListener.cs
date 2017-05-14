@@ -2,7 +2,7 @@
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
+using System.Threading.Tasks;
 using VTS.BL;
 using VTS.DependencyInjectionRegister;
 using Autofac;
@@ -11,6 +11,7 @@ namespace VTS.VehicleListener
 {
     class VehicleTCPListener : IListner
     {
+
         private TcpListener listener;
         private const int PortNumber = 5555;
 
@@ -20,11 +21,16 @@ namespace VTS.VehicleListener
             listener = new TcpListener(GetServerIP());
         }
 
+
+        /// <summary>
+        /// Returns the server IP where clients connects to
+        /// </summary>
+        /// <returns></returns>
         private IPEndPoint GetServerIP()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
 
-            IPAddress ipAddress = ipHostInfo.AddressList[0];
+            IPAddress ipAddress = ipHostInfo.AddressList[2];
 
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, PortNumber);
 
@@ -53,7 +59,8 @@ namespace VTS.VehicleListener
                 {
                     client = listener.AcceptTcpClient();
 
-                    ThreadPool.QueueUserWorkItem(ProcessData, client);
+
+                    Task.Factory.StartNew(() => ProcessData(client));
                 }
 
             }
@@ -66,12 +73,10 @@ namespace VTS.VehicleListener
         /// Process the retrieved data from clients
         /// </summary>
         /// <param name="obj">TCP Client</param>
-        private void ProcessData(object obj)
+        private void ProcessData(TcpClient client)
         {
             try
             {
-                var client = (TcpClient)obj;
-
                 Byte[] bytes = new Byte[256];
 
                 try
@@ -82,9 +87,7 @@ namespace VTS.VehicleListener
 
                     var bytesRead = stream.Read(bytesToRead, 0, client.ReceiveBufferSize);
 
-                    var vehicleId = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
-
-                   new ResponseHandler().HandleResponse(vehicleId);
+                    var vehicleId = new ResponseHandler().HandleResponse(bytesToRead,bytesRead);
 
                     Console.WriteLine("Received : " + vehicleId);
 

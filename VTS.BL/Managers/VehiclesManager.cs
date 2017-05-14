@@ -53,6 +53,11 @@ namespace VTS.BL
         {
             try
             {
+                if(_vehicleRepository.GetVehicleById(vehicleId) == null)
+                {
+                    return false;
+                }
+
                 _vehicleRepository.UpdateVehicleStatus(vehicleId, status);
 
                 return true;
