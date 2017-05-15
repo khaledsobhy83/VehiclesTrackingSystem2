@@ -40,6 +40,10 @@ namespace VTS.WebAPI.Controllers
         [HttpPost]
         public bool UpdateMyStatus(VehicleStatus vehicleStatus)
         {
+            if(vehicleStatus.status > 1)
+            {
+                return false;
+            }
             return _vehiclesManager.UpdateVehicleStatus(vehicleStatus.vehicleId, (VehicleStatusEnum)vehicleStatus.status);
         }
 

@@ -80,50 +80,50 @@ namespace VTS.FileStore
 
 
 
-                CustomerStore customer2 = new CustomerStore();
-                customer2.CustomerName = "Johans Bulk AB";
-                customer2.CustomerAddress = "Balkvägen 12, 222 22 Stockholm";
-                customer2.ID = 2;
-                customer2.Vehicles = new List<VehicleStore>();
-                customer2.Vehicles.Add(new VehicleStore()
-                {
-                    CustomerId = customer2.ID,
-                    RegistrationNo = "JKL012",
-                    VehicleId = "YS2R4X20005388011",
-                    VehicleStatus = "Offline"
-                });
-                customer2.Vehicles.Add(new VehicleStore()
-                {
-                    CustomerId = customer2.ID,
-                    RegistrationNo = "MNO345",
-                    VehicleId = "YS2R4X20005387949",
-                    VehicleStatus = "Offline"
-                });
+            //    CustomerStore customer2 = new CustomerStore();
+            //    customer2.CustomerName = "Johans Bulk AB";
+            //    customer2.CustomerAddress = "Balkvägen 12, 222 22 Stockholm";
+            //    customer2.ID = 2;
+            //    customer2.Vehicles = new List<VehicleStore>();
+            //    customer2.Vehicles.Add(new VehicleStore()
+            //    {
+            //        CustomerId = customer2.ID,
+            //        RegistrationNo = "JKL012",
+            //        VehicleId = "YS2R4X20005388011",
+            //        VehicleStatus = "Offline"
+            //    });
+            //    customer2.Vehicles.Add(new VehicleStore()
+            //    {
+            //        CustomerId = customer2.ID,
+            //        RegistrationNo = "MNO345",
+            //        VehicleId = "YS2R4X20005387949",
+            //        VehicleStatus = "Offline"
+            //    });
                 
-                customersVehicles.Add(customer2);
+            //    customersVehicles.Add(customer2);
 
-                CustomerStore customer3 = new CustomerStore();
-                customer3.CustomerName = "Haralds Värdetransporter AB";
-                customer3.CustomerAddress = "Budgetvägen 1, 333 33 Uppsala";
-                customer3.ID = 3;
-                customer3.Vehicles = new List<VehicleStore>();
-                customer3.Vehicles.Add(new VehicleStore()
-                {
-                    CustomerId = customer3.ID,
-                    RegistrationNo = "PQR678",
-                    VehicleId = "YS2R4X20005387765",
-                    VehicleStatus = "Offline"
-                });
-                customer3.Vehicles.Add(new VehicleStore()
-                {
-                    CustomerId = customer3.ID,
-                    RegistrationNo = "STU901",
-                    VehicleId = "YS2R4X20005387055",
-                    VehicleStatus = "Offline"
-                });
+            //    CustomerStore customer3 = new CustomerStore();
+            //    customer3.CustomerName = "Haralds Värdetransporter AB";
+            //    customer3.CustomerAddress = "Budgetvägen 1, 333 33 Uppsala";
+            //    customer3.ID = 3;
+            //    customer3.Vehicles = new List<VehicleStore>();
+            //    customer3.Vehicles.Add(new VehicleStore()
+            //    {
+            //        CustomerId = customer3.ID,
+            //        RegistrationNo = "PQR678",
+            //        VehicleId = "YS2R4X20005387765",
+            //        VehicleStatus = "Offline"
+            //    });
+            //    customer3.Vehicles.Add(new VehicleStore()
+            //    {
+            //        CustomerId = customer3.ID,
+            //        RegistrationNo = "STU901",
+            //        VehicleId = "YS2R4X20005387055",
+            //        VehicleStatus = "Offline"
+            //    });
 
 
-                customersVehicles.Add(customer3);
+            //    customersVehicles.Add(customer3);
             }
             SerializeCollection();
         }

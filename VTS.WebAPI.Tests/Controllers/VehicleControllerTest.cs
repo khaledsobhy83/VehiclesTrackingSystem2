@@ -76,7 +76,7 @@ namespace VTS.WebAPI.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count());
-            Assert.AreEqual("VLUR4X20009093588", result.ElementAt(0).VehicleId);
+            Assert.AreEqual("VLUR4X20009093588", result.LastOrDefault().VehicleId);
         }
         [TestMethod]
         public void GetByStatus_Offline_Success()
@@ -90,7 +90,7 @@ namespace VTS.WebAPI.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("YS2R4X20005399401", result.ElementAt(0).VehicleId);
+            Assert.AreEqual("VLUR4X20009048066", result.LastOrDefault().VehicleId);
         }
         [TestMethod]
         public void GetByStatus_InvalidStatus()
