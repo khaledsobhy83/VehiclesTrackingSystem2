@@ -13,22 +13,82 @@ namespace VTS.Data.Sql
         protected override void Seed(VTSModel context)
         {
 
-            context.VehicleStatus.Add(new Entity.VehicleStatus()
+            InitializeVehicleStatus(context);
+
+            InitializeCustomer1(context);
+
+            InitializeCustomer2(context);
+
+            InitializeCustomer3(context);
+
+            context.SaveChanges();
+        }
+
+        private void InitializeCustomer3(VTSModel context)
+        {
+            var vehiclesList = new List<Vehicle>();
+
+            vehiclesList.Add(new Entity.Vehicle()
             {
-                Id = 1,
-                StatusName = "Online"
+                RegistrationNo = "PQR678",
+                VIN = "YS2R4X20005387765",
+                VehicleStatus = 2,
+                IsDeleted = false,
+                IsActive = true
             });
-            context.VehicleStatus.Add(new Entity.VehicleStatus()
+            vehiclesList.Add(new Entity.Vehicle()
             {
-                Id = 2,
-                StatusName = "Offline"
+                RegistrationNo = "STU901",
+                VIN = "YS2R4X20005387055",
+                VehicleStatus = 2,
+                IsDeleted = false,
+                IsActive = true
             });
-            context.VehicleStatus.Add(new Entity.VehicleStatus()
+
+
+            context.Customer.Add(new Entity.Customer()
             {
-                Id = 3,
-                StatusName = "Unknown"
+                CustomerName = "Haralds Värdetransporter AB",
+                CustomerAddress = "Budgetvägen 1, 333 33 Uppsala",
+                IsDeleted = false,
+                IsActive = true,
+                Vehicle = vehiclesList
             });
-            ///////////////////////////Customer 1///////////////////////////////////
+
+        }
+
+        private void InitializeCustomer2(VTSModel context)
+        {
+            var vehiclesList = new List<Vehicle>();
+
+            vehiclesList.Add(new Entity.Vehicle()
+            {
+                RegistrationNo = "JKL012",
+                VIN = "YS2R4X20005388011",
+                VehicleStatus = 2,
+                IsDeleted = false,
+                IsActive = true
+            });
+            vehiclesList.Add(new Entity.Vehicle()
+            {
+                RegistrationNo = "MNO345",
+                VIN = "YS2R4X20005387949",
+                VehicleStatus = 2,
+                IsDeleted = false,
+                IsActive = true
+            });
+            context.Customer.Add(new Entity.Customer()
+            {
+                CustomerName = "Johans Bulk AB",
+                CustomerAddress = "Balkvägen 12, 222 22 Stockholm",
+                IsDeleted = false,
+                IsActive = true,
+                Vehicle = vehiclesList
+            });
+        }
+
+        private void InitializeCustomer1(VTSModel context)
+        {
             var vehiclesList = new List<Vehicle>();
 
             vehiclesList.Add(new Entity.Vehicle()
@@ -63,66 +123,25 @@ namespace VTS.Data.Sql
                 IsActive = true,
                 Vehicle = vehiclesList
             });
-            //////////////////////////////////////Customer 2///////////////////////////////////////
-            vehiclesList = new List<Vehicle>();
+        }
 
-            vehiclesList.Add(new Entity.Vehicle()
+        private void InitializeVehicleStatus(VTSModel context)
+        {
+            context.VehicleStatus.Add(new Entity.VehicleStatus()
             {
-                RegistrationNo = "JKL012",
-                VIN = "YS2R4X20005388011",
-                VehicleStatus = 2,
-                IsDeleted = false,
-                IsActive = true
+                Id = 1,
+                StatusName = "Online"
             });
-            vehiclesList.Add(new Entity.Vehicle()
+            context.VehicleStatus.Add(new Entity.VehicleStatus()
             {
-                RegistrationNo = "MNO345",
-                VIN = "YS2R4X20005387949",
-                VehicleStatus = 2,
-                IsDeleted = false,
-                IsActive = true
+                Id = 2,
+                StatusName = "Offline"
             });
-            context.Customer.Add(new Entity.Customer()
+            context.VehicleStatus.Add(new Entity.VehicleStatus()
             {
-                CustomerName = "Johans Bulk AB",
-                CustomerAddress = "Balkvägen 12, 222 22 Stockholm",
-                IsDeleted = false,
-                IsActive = true,
-                Vehicle = vehiclesList
+                Id = 3,
+                StatusName = "Unknown"
             });
-            ////////////////////////////////Customer 3/////////////////////////////////
-
-            vehiclesList = new List<Vehicle>();
-
-            vehiclesList.Add(new Entity.Vehicle()
-            {
-                RegistrationNo = "PQR678",
-                VIN = "YS2R4X20005387765",
-                VehicleStatus = 2,
-                IsDeleted = false,
-                IsActive = true
-            });
-            vehiclesList.Add(new Entity.Vehicle()
-            {
-                RegistrationNo = "STU901",
-                VIN = "YS2R4X20005387055",
-                VehicleStatus = 2,
-                IsDeleted = false,
-                IsActive = true
-            });
-
-
-            context.Customer.Add(new Entity.Customer()
-            {
-                CustomerName = "Haralds Värdetransporter AB",
-                CustomerAddress = "Budgetvägen 1, 333 33 Uppsala",
-                IsDeleted = false,
-                IsActive = true,
-                Vehicle = vehiclesList
-            });
-
-
-            context.SaveChanges();
         }
     }
 }

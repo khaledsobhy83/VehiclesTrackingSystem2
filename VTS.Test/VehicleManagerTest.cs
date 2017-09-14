@@ -70,5 +70,36 @@ namespace VTS.Test
             Assert.AreEqual(result, false);
 
         }
+
+        [TestMethod]
+        public void SearchVehicles_Success()
+        {
+            var vehiclesList = vehiclesManager.SearchVehicles(1, 2);
+
+            Assert.AreEqual(vehiclesList.Count, 3);
+
+            vehiclesList = vehiclesManager.SearchVehicles(2, 2);
+
+            Assert.AreEqual(vehiclesList.Count, 2);
+
+        }
+
+        [TestMethod]
+        public void SearchVehicles_WrongStatus_NoResults()
+        {
+            var vehiclesList = vehiclesManager.SearchVehicles(1, 1);
+
+            Assert.AreEqual(vehiclesList.Count, 0);
+        }
+
+        [TestMethod]
+        public void SearchVehicles_WrongCustomer_NoResults()
+        {
+            var vehiclesList = vehiclesManager.SearchVehicles(5, 1);
+
+            Assert.AreEqual(vehiclesList.Count, 0);
+        }
+
+
     }
 }

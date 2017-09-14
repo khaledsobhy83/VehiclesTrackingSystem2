@@ -136,52 +136,39 @@ namespace VTS.WebAPI.Tests.Controllers
             Assert.IsFalse(result);
         }
         [TestMethod]
-        public void GetById()
+        public void SearchVehicles_Success()
         {
-            // Arrange
-            ValuesController controller = new ValuesController();
+            VehicleController controller = new VehicleController(vehiclesManager);
 
-            // Act
-            string result = controller.Get(5);
+            var vehiclesList = controller.SearchVehicles(1, 2);
 
-            // Assert
-            Assert.AreEqual("value", result);
+            Assert.AreEqual(vehiclesList.Count(), 3);
+
+            vehiclesList = controller.SearchVehicles(2, 2);
+
+            Assert.AreEqual(vehiclesList.Count(), 2);
+
         }
 
         [TestMethod]
-        public void Post()
+        public void SearchVehicles_WrongStatus_NoResults()
         {
-            // Arrange
-            ValuesController controller = new ValuesController();
+            VehicleController controller = new VehicleController(vehiclesManager);
 
-            // Act
-            controller.Post("value");
+            var vehiclesList = controller.SearchVehicles(1, 1);
 
-            // Assert
+            Assert.AreEqual(vehiclesList.Count(), 0);
         }
 
         [TestMethod]
-        public void Put()
+        public void SearchVehicles_WrongCustomer_NoResults()
         {
-            // Arrange
-            ValuesController controller = new ValuesController();
+            VehicleController controller = new VehicleController(vehiclesManager);
 
-            // Act
-            controller.Put(5, "value");
+            var vehiclesList = controller.SearchVehicles(5, 1);
 
-            // Assert
+            Assert.AreEqual(vehiclesList.Count(), 0);
         }
 
-        [TestMethod]
-        public void Delete()
-        {
-            // Arrange
-            ValuesController controller = new ValuesController();
-
-            // Act
-            controller.Delete(5);
-
-            // Assert
-        }
     }
 }

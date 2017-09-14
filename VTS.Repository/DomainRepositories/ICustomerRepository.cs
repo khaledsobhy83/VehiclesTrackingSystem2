@@ -12,6 +12,10 @@ namespace VTS.Repository
     /// </summary>
     public interface ICustomerRepository : IRepository<Customer>
     {
+        /// <summary>
+        /// Returns all active and not deleted customers
+        /// </summary>
+        /// <returns></returns>
         IQueryable<Customer> GetAllCustomers();
     }
 }

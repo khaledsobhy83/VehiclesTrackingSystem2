@@ -17,7 +17,10 @@ namespace VTS.Repository
         {
 
         }
-
+        /// <summary>
+        /// Returns all active and not deleted customers
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Customer> GetAllCustomers()
         {
             return _dbContext.Set<Customer>().Where(c => c.IsDeleted == false && c.IsActive==true);
