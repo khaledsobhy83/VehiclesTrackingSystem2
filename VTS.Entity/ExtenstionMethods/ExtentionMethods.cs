@@ -9,26 +9,38 @@ namespace VTS.Entity
 {
     public static class ExtentionMethods
     {
-        public static List<VehicleDTO> GetDTO(this List<Customer> customerList)
+        public static List<VehicleDTO> GetDTO(this List<Vehicle> vehiclesList)
         {
             List<VehicleDTO> vehicleList = new List<VehicleDTO>();
 
-            foreach( Customer customerentity in customerList)
+            foreach (Vehicle vehicle in vehiclesList)
             {
-                foreach (Vehicle vehicle in customerentity.Vehicles)
+                vehicleList.Add(new VehicleDTO()
                 {
-                    vehicleList.Add(new VehicleDTO()
-                    {
-                        CustomerName = customerentity.CustomerName,
-                        RegistrationNo = vehicle.RegistrationNo,
-                        VehicleId = vehicle.VehicleId,
-                        VehicleStatus = vehicle.VehicleStatus == VehicleStatusEnum.Offline ? "Offline" : "Online"
-                    });
-                }
+                    CustomerName = vehicle.Customer.CustomerName,
+                    RegistrationNo = vehicle.RegistrationNo,
+                    VehicleId = vehicle.VIN,
+                    VehicleStatus = vehicle.VehicleStatus.ToString()
+                });
             }
 
-            
             return vehicleList;
+        }
+
+        public static List<CustomerDTO> GetDTO(this List<Customer> customerList)
+        {
+            List<CustomerDTO> customerDTOs = new List<CustomerDTO>();
+
+            foreach (Customer customer in customerList)
+            {
+                customerDTOs.Add(new CustomerDTO()
+                {
+                    CustomerId = customer.Id,
+                    CustomerName = customer.CustomerName
+                });
+            }
+
+            return customerDTOs;
         }
     }
 }

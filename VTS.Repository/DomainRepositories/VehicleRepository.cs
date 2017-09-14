@@ -1,69 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VTS.Entity;
-using VTS.FileStore;
+using VTS.Data.Sql;
 using AutoMapper;
 using VTS.Helpers.Enums;
+using VTS.Entity;
+using System.Data.Entity;
+
 namespace VTS.Repository
 {
     /// <summary>
     /// Inherits the FileRepository methods and implements the vehicle specific methods in IVehicleRepository
     /// </summary>
-    public class VehicleRepository : FileRepository<Vehicle>,IVehicleRepository
+    public class VehicleRepository : SqlRepository<Vehicle>,IVehicleRepository
     {
-        
-        public List<Customer> GetAllVehicles()
+        public VehicleRepository(DbContext dbContext) : base(dbContext)
         {
-            var vehiclesList = VehicleSystemFileStore.CustomersVehicles.ToList();
             
-            return Mapper.Map<List<Customer>>(vehiclesList);
+        }
+
+        public IQueryable<Vehicle> GetAllVehicles()
+        {
+            return _dbContext.Set<Vehicle>().Where(v => v.IsDeleted == false && v.IsActive == true);
         }
         /// <summary>
         /// Returns vehicles by customer
         /// </summary>
         /// <param name="customerId"> The customer id where vehicle is associated with</param>
         /// <returns>Returns list of vehicles</returns>
-        public List<Customer> GetVehiclesByCustomer(int customerId)
+        public IQueryable<Vehicle> GetVehiclesByCustomer(int customerId)
         {
-            var vehiclesList = VehicleSystemFileStore.CustomersVehicles.Where(c => c.ID == customerId).ToList();
-
-            return Mapper.Map<List<Customer>>(vehiclesList);
+            return GetAllVehicles().Where(v=> v.CustomerId == customerId);
         }
         /// <summary>
         /// Returns vehicles by status
         /// </summary>
         /// <param name="customerId"> Vehicle status</param>
         /// <returns>Returns list of vehicles</returns>
-        public List<Customer> GetVehiclesByStatus(VehicleStatusEnum status)
+        public IQueryable<Vehicle> GetVehiclesByStatus(int status)
         {
-            var statusString = Enum.GetName(status.GetType(), status);
-
-            var vehiclesList = VehicleSystemFileStore.CustomersVehicles.Where(v => v.Vehicles.Any(x => x.VehicleStatus == statusString)).
-                Select
-                (c => new CustomerStore
-                {
-                    CustomerAddress = c.CustomerAddress,
-                    ID = c.ID,
-                    CustomerName = c.CustomerName,
-                    Vehicles = c.Vehicles.Where(s => s.VehicleStatus == statusString).ToList()
-                }).ToList();
-
-            return Mapper.Map<List<Customer>>(vehiclesList);
+            return GetAllVehicles().Where(v => v.VehicleStatus == status);
         }
         /// <summary>
         /// Returns vehicles by its Id
         /// </summary>
         /// <param name="vehicleId">Vehicle Id</param>
         /// <returns>Returns vehicle entity matching the specified id</returns>
+        public Vehicle GetVehicleById(int vehicleId)
+        {
+            return _dbContext.Set<Vehicle>().Where(v => v.Id == vehicleId).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Returns vehicle bu its VIN
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns></returns>
         public Vehicle GetVehicleById(string vehicleId)
         {
-            var vehiclesList = VehicleSystemFileStore.CustomersVehicles.Select
-                (c => c.Vehicles.Where(s => s.VehicleId == vehicleId)).SingleOrDefault();
-
-            return Mapper.Map<List<Vehicle>>(vehiclesList).SingleOrDefault();
+            return _dbContext.Set<Vehicle>().Where(v => v.VIN == vehicleId).FirstOrDefault();
+        }
+        public IQueryable<Vehicle> SearchVehicles(int customerId, int status)
+        {
+            return GetAllVehicles().Where(v => v.CustomerId==customerId && v.VehicleStatus == status);
         }
         /// <summary>
         /// Updates spcific vehcile status
@@ -71,12 +70,12 @@ namespace VTS.Repository
         /// <param name="vehicleId">The vehicle id to update its status</param>
         /// <param name="status">The new vehicle status</param>
         /// <returns>True if the vehcle status is updated successfully, false otherwise</returns>
-        public void UpdateVehicleStatus(string vehicleId, VehicleStatusEnum status)
+        public bool UpdateVehicleStatus(Vehicle vehicle)
         {
-            VehicleSystemFileStore.CustomersVehicles.Select
-                (c => c.Vehicles.Where(s => s.VehicleId == vehicleId)).SingleOrDefault().ToList().ForEach(x => { x.VehicleStatus = "Online"; }); ;
-            
-            VehicleSystemFileStore.SerializeCollection();
+            Update(vehicle);
+
+            return _dbContext.SaveChanges() == 1;
+
         }
 
     }

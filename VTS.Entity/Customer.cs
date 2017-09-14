@@ -1,67 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace VTS.Entity
 {
-    public class Customer
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    [Table("Customer")]
+    public partial class Customer
     {
-        private int id;
-
-        public int ID
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
         {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
+            Vehicle = new HashSet<Vehicle>();
         }
 
-        private string customerName;
+        public long Id { get; set; }
 
-        public string CustomerName
-        {
-            get
-            {
-                return customerName;
-            }
-            set
-            {
-                customerName = value;
-            }
-        }
+        [StringLength(150)]
+        public string CustomerName { get; set; }
 
-        private string customerAddress;
+        [StringLength(500)]
+        public string CustomerAddress { get; set; }
 
-        public string CustomerAddress
-        {
-            get
-            {
-                return customerAddress;
-            }
-            set
-            {
-                customerAddress = value;
-            }
-        }
+        public bool? IsDeleted { get; set; }
 
-        private List<Vehicle> vehicles;
+        public bool? IsActive { get; set; }
 
-        public List<Vehicle> Vehicles
-        {
-            get
-            {
-                return vehicles;
-            }
-            set
-            {
-                vehicles = value;
-            }
-        }
+        public DateTime? CreatedOn { get; set; }
+
+        public int? CreatedBy { get; set; }
+
+        public DateTime? UpdatedOn { get; set; }
+
+        public int? UpdatedBy { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vehicle> Vehicle { get; set; }
     }
 }

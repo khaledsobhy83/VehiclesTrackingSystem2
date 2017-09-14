@@ -29,7 +29,7 @@ namespace VTS.WebAPI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(7, result.Count());
             Assert.AreEqual("YS2R4X20005399401", result.ElementAt(0).VehicleId);
             
         }
@@ -71,12 +71,13 @@ namespace VTS.WebAPI.Tests.Controllers
             VehicleController controller = new VehicleController(vehiclesManager);
 
             // Act
-            IEnumerable<VehicleDTO> result = controller.GetByStatus(0);
+            IEnumerable<VehicleDTO> result = controller.GetByStatus(1);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count());
-            Assert.AreEqual("VLUR4X20009093588", result.LastOrDefault().VehicleId);
+
+            Assert.AreEqual(0, result.Count());
+            
         }
         [TestMethod]
         public void GetByStatus_Offline_Success()
@@ -85,12 +86,12 @@ namespace VTS.WebAPI.Tests.Controllers
             VehicleController controller = new VehicleController(vehiclesManager);
 
             // Act
-            IEnumerable<VehicleDTO> result = controller.GetByStatus(1);
+            IEnumerable<VehicleDTO> result = controller.GetByStatus(2);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("VLUR4X20009048066", result.LastOrDefault().VehicleId);
+            Assert.AreEqual(7, result.Count());
+            Assert.AreEqual("YS2R4X20005387055", result.LastOrDefault().VehicleId);
         }
         [TestMethod]
         public void GetByStatus_InvalidStatus()
@@ -112,11 +113,11 @@ namespace VTS.WebAPI.Tests.Controllers
             VehicleController controller = new VehicleController(vehiclesManager);
 
             // Act
-            var result = controller.UpdateMyStatus(new VehicleStatus() { vehicleId = "YS2R4X20005399401", status = 0 });
+            var result = controller.UpdateMyStatus(new VehicleStatusStruct() { vehicleId = "YS2R4X20005399401", status = 1 });
 
             // Assert
             Assert.IsTrue(result);
-            Assert.AreEqual(2, controller.GetByStatus(0).Count());
+            Assert.AreEqual(6, controller.GetByStatus(2).Count());
             Assert.AreEqual(1, controller.GetByStatus(1).Count());
         }
         [TestMethod]
@@ -129,7 +130,7 @@ namespace VTS.WebAPI.Tests.Controllers
             VehicleController controller = new VehicleController(vehiclesManager);
 
             // Act
-            var result = controller.UpdateMyStatus(new VehicleStatus() { vehicleId = "YS2R4X20005399401", status = 5 });
+            var result = controller.UpdateMyStatus(new VehicleStatusStruct() { vehicleId = "YS2R4X20005399401", status = 5 });
 
             // Assert
             Assert.IsFalse(result);

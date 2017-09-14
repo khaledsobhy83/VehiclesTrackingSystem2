@@ -16,21 +16,28 @@ namespace VTS.BL
         /// </summary>
         /// <param name="customerId"> The customer id where vehicle is associated with</param>
         /// <returns>Returns list of vehicles</returns>
-        List<Customer> GetAllVehicles();
+        List<Vehicle> GetAllVehicles();
 
         /// <summary>
         /// Returns vehicles by customer
         /// </summary>
         /// <param name="customerId"> The customer id where vehicle is associated with</param>
         /// <returns>Returns list of vehicles</returns>
-        List<Customer> GetVehiclesByCustomer(int customerId);
+        List<Vehicle> GetVehiclesByCustomer(int customerId);
 
         /// <summary>
         /// Returns vehicles by status
         /// </summary>
         /// <param name="customerId"> Vehicle status</param>
         /// <returns>Returns list of vehicles</returns>
-        List<Customer> GetVehiclesByStatus(VehicleStatusEnum status);
+        List<Vehicle> GetVehiclesByStatus(VehicleStatusEnum status);
+
+        /// <summary>
+        /// Return vehicles for specific customer with specific status
+        /// </summary>
+        /// <param name="status">Vehicle status</param>
+        /// <returns></returns>
+        List<Vehicle> SearchVehicles(int customerId, int status);
 
         /// <summary>
         /// Updates spcific vehcile status

@@ -10,16 +10,18 @@ namespace VTS.Repository
     /// <summary>
     /// This interface has domain specifc methods other than those in the IRepository
     /// </summary>
-    public interface IVehicleRepository
+    public interface IVehicleRepository : IRepository<Vehicle>
     {
-        List<Customer> GetAllVehicles();
+        IQueryable<Vehicle> GetAllVehicles();
 
-        List<Customer> GetVehiclesByCustomer(int customerId);
+        IQueryable<Vehicle> GetVehiclesByCustomer(int customerId);
 
-        List<Customer> GetVehiclesByStatus(VehicleStatusEnum status);
+        IQueryable<Vehicle> GetVehiclesByStatus(int status);
+
+        IQueryable<Vehicle> SearchVehicles(int customerId, int status);
 
         Vehicle GetVehicleById(string vehicleId);
 
-        void UpdateVehicleStatus(string vehicleId, VehicleStatusEnum status);
+        bool UpdateVehicleStatus(Vehicle vehicle);
     }
 }

@@ -16,31 +16,44 @@ function maxWindow() {
     }
 }
 function OnCustomerChanged(selectedValue) {
-    searchVehicles(2, selectedValue);
-}
 
-function getServiceUrl(type, paramaterValue) {
+    searchVehicles();
+}
+function getServiceUrl() {
+
+    var statusId = getSelectedStatus();
+    
+    var customerId = $("#DDlCustomers :selected").val();
+
     var serviceURL = 'http://localhost:17645/API/Vehicle/Get';
 
-    if (type == 1) {
+    if (statusId > 0 && customerId > 0) {
 
-        serviceURL = 'http://localhost:17645/API/Vehicle/GetByStatus/' + paramaterValue
+        serviceURL = 'http://localhost:17645/API/Vehicle/SearchVehicles?customerId=' + customerId + '&status=' + statusId
     }
-    else if (type == 2) {
+    else if (customerId > 0) {
 
-        serviceURL = 'http://localhost:17645/API/Vehicle/GetByCustomer/' + paramaterValue
+        serviceURL = 'http://localhost:17645/API/Vehicle/GetByCustomer/' + customerId
+    }
+    else if (statusId > 0) {
+
+        serviceURL = 'http://localhost:17645/API/Vehicle/GetByStatus/' + statusId
+    }
+    else {
+        serviceURL = 'http://localhost:17645/API/Vehicle/Get';
     }
     return serviceURL;
 }
-function searchVehicles(type, paramaterValue) {
+function searchVehicles() {
 
-    var serviceURL = getServiceUrl(type, paramaterValue);
+    
+    var serviceURL = getServiceUrl();
 
     $.ajax({
         type: 'GET',
         url: serviceURL
     }).done(function (result) {
-        console.log(result.length);
+
         $("#tblVehicles").jqGrid("clearGridData", true)
 
         $("#tblVehicles").jqGrid('setGridParam', { data: result });
@@ -48,6 +61,7 @@ function searchVehicles(type, paramaterValue) {
         $("#tblVehicles").trigger("reloadGrid");
 
     }).error(function (jqXHR, textStatus, errorThrown) {
+
         alert(jqXHR.responseText || textStatus);
     });
 }
@@ -58,8 +72,27 @@ function GetAllVehciles() {
         type: 'GET',
         url: 'http://localhost:17645/API/Vehicle/Get'
     }).done(function (data) {
-        console.log(data.length);
         displayResults(data);
+    }).error(function (jqXHR, textStatus, errorThrown) {
+        alert(jqXHR.responseText || textStatus);
+    });
+}
+function GetCustomersList() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:17645/API/Customer/Get'
+    }).done(function (data) {
+
+        var options = "";
+
+        options = "<option value='-1'>All</option>";
+
+        $.each(data, function (a, b) {
+            options += "<option value='" + b.CustomerId + "'>" + b.CustomerName + "</option>";
+        });
+
+        $("#DDlCustomers").html(options);
+
     }).error(function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText || textStatus);
     });
@@ -90,25 +123,32 @@ function displayResults(vlist) {
         caption: ""
     });
 }
-function getSelectedStatus(){
+
+function getSelectedStatus() {
+
     var status = $('input[name=group1]:checked').val();
     
     return status;
 }
+
 $(document).ready(function () {
+
+    GetCustomersList();
 
     GetAllVehciles();
 
     $("#rdOnline").click(function (e) {
-        searchVehicles(1,0);
+        searchVehicles();
     });
     $("#rdOffline").click(function (e) {
-        searchVehicles(1, 1);
+        searchVehicles();
     });
     $("#rdAll").click(function (e) {
-        searchVehicles(0, 0);
+        searchVehicles();
     });
-
+    $('#DDlCustomers').on('change', function () {
+        OnCustomerChanged(this.value);
+    })
     //var myVar = setInterval(function () { myTimer() }, 6000);
     //function myTimer() {
     //    var status = getSelectedStatus();

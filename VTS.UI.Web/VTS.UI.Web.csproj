@@ -224,8 +224,16 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\grid-0.4.3.css" />
+    <Content Include="Content\grid-0.4.3.min.css" />
+    <Content Include="Content\grid\core.css" />
+    <Content Include="Content\grid\core.min.css" />
+    <Content Include="Content\grid\grid.css" />
+    <Content Include="Content\grid\grid.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -239,7 +247,15 @@
     </Content>
     <Content Include="ClassDiagram1.cd" />
     <Content Include="ClassDiagram2.cd" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\grid-0.4.3.js" />
+    <Content Include="Scripts\grid-0.4.3.min.js" />
+    <Content Include="Scripts\grid\core.js" />
+    <Content Include="Scripts\grid\core.min.js" />
+    <Content Include="Scripts\grid\grid.js" />
+    <Content Include="Scripts\grid\grid.min.js" />
     <Content Include="Scripts\JQGrid\grid.locale-en.js" />
     <Content Include="Scripts\JQGrid\jquery.jqGrid.js" />
     <Content Include="Scripts\JQGrid\ui.jqgrid-bootstrap-ui.css" />
@@ -247,13 +263,19 @@
     <Content Include="Scripts\JQGrid\ui.jqgrid.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MyScripts\CustomerScript.js" />
     <Content Include="Scripts\MyScripts\VehicleStatusMain.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

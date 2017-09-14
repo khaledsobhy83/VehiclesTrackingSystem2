@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using VTS.BL;
 using VTS.DependencyInjectionRegister;
 using Autofac;
+using System.Linq;
 
 namespace VTS.VehicleListener
 {
@@ -30,7 +31,7 @@ namespace VTS.VehicleListener
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
 
-            IPAddress ipAddress = ipHostInfo.AddressList[2];
+            IPAddress ipAddress = ipHostInfo.AddressList.Where(i => i.AddressFamily == AddressFamily.InterNetwork).FirstOrDefault();
 
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, PortNumber);
 
@@ -54,6 +55,8 @@ namespace VTS.VehicleListener
                 TcpClient client;
 
                 listener.Start();
+
+                Console.WriteLine("Listening to:" + listener.LocalEndpoint);
 
                 while (true)
                 {

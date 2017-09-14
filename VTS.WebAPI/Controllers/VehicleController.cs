@@ -35,10 +35,15 @@ namespace VTS.WebAPI.Controllers
         {
             return _vehiclesManager.GetVehiclesByStatus((VehicleStatusEnum)id).GetDTO();
         }
-       
+        [HttpGet]
+        public IEnumerable<VehicleDTO> SearchVehicles(int customerId, int status)
+        {
+            return _vehiclesManager.SearchVehicles(customerId, status).GetDTO();
+        }
+
         // POST api/<controller>
         [HttpPost]
-        public bool UpdateMyStatus(VehicleStatus vehicleStatus)
+        public bool UpdateMyStatus(VehicleStatusStruct vehicleStatus)
         {
             if(vehicleStatus.status > 1)
             {

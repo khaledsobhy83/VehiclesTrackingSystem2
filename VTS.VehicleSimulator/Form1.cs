@@ -19,8 +19,8 @@ namespace VTS.VehicleSimulator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            VehicleTCPClient client = new VehicleTCPClient(textBox1.Text, 5555);
-            client.Start();
+            VehicleTCPClient client = new VehicleTCPClient(txtIPAddress.Text, 5555);
+            client.Start(txtVehicleNo.Text);
         }
     }
 }

@@ -34,8 +34,18 @@
       <HintPath>..\packages\Autofac.4.5.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,12 +58,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VTS.BL\VTS.BL.csproj">
       <Project>{18eb19fe-9b57-4d6b-8ef7-ab5c659c3d3f}</Project>
       <Name>VTS.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VTS.Data.Sql\VTS.Data.Sql.csproj">
+      <Project>{268BEBC4-AAB3-4490-93F0-21EE01975B97}</Project>
+      <Name>VTS.Data.Sql</Name>
     </ProjectReference>
     <ProjectReference Include="..\VTS.Repository\VTS.Repository.csproj">
       <Project>{65b16266-5d8e-48d6-9642-3abf3606e430}</Project>

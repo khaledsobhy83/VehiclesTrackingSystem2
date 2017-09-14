@@ -10,8 +10,8 @@ namespace VTS.Repository
     /// <summary>
     /// This interface has domain specifc methods other than those in the IRepository
     /// </summary>
-    public interface ICustomerRepository
+    public interface ICustomerRepository : IRepository<Customer>
     {
-        List<Customer> GetAllCustomers();
+        IQueryable<Customer> GetAllCustomers();
     }
 }

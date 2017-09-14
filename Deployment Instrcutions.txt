@@ -1,0 +1,13 @@
+The system consists of 4 main components
+1. Services (Web Apis)
+2. UI (MVC)
+3. Listerner (Console Application)
+4. Simulator (Windows Forms)
+
+- Open the solution and rebuild all
+- Updated the Connection strings in the web.config of both service and web application
+- Make the web Application under UI folder as startup project and run
+- Database will be created once the web application runs
+- Run simulator and copy the IP address it is listening to, from the console screen. only the address without port number
+- Run the simulator exe and paste the IP address to connect
+- Enter the vehicle no that you want to be online then click the "I Am Online" button

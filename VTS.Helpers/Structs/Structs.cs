@@ -9,7 +9,7 @@ namespace VTS.Helpers
     /// <summary>
     /// Used as a paramater to recieve vehicle and its status
     /// </summary>
-    public struct VehicleStatus
+    public struct VehicleStatusStruct
     {
         public string vehicleId;
         public int status;

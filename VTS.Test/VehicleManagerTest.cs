@@ -12,9 +12,7 @@ namespace VTS.Test
         {
             var vehiclesList = vehiclesManager.GetAllVehicles();
 
-            Assert.AreEqual(vehiclesList.Count, 1);
-
-            Assert.AreEqual(vehiclesList[0].Vehicles.Count, 3);
+            Assert.AreEqual(vehiclesList.Count, 7);
         }
 
         [TestMethod]
@@ -22,9 +20,7 @@ namespace VTS.Test
         {
             var vehiclesList = vehiclesManager.GetVehiclesByCustomer(1);
 
-            Assert.AreEqual(vehiclesList.Count, 1);
-
-            Assert.AreEqual(vehiclesList[0].Vehicles.Count, 3);
+            Assert.AreEqual(vehiclesList.Count, 3);
         }
         [TestMethod]
         public void GetVehiclesByCustomer_NoResults()
@@ -39,14 +35,16 @@ namespace VTS.Test
         {
             var vehiclesList = vehiclesManager.GetVehiclesByStatus(Helpers.Enums.VehicleStatusEnum.Offline);
 
-            Assert.AreEqual(vehiclesList.Count, 1);
-
-            Assert.AreEqual(vehiclesList[0].Vehicles.Count, 2);
+            Assert.AreEqual(vehiclesList.Count, 7);
         }
         [TestMethod]
         public void GetVehiclesByStatus_NoResults()
         {
             var vehiclesList = vehiclesManager.GetVehiclesByStatus(Helpers.Enums.VehicleStatusEnum.Unknown);
+
+            Assert.AreEqual(vehiclesList.Count, 0);
+
+            vehiclesList = vehiclesManager.GetVehiclesByStatus(Helpers.Enums.VehicleStatusEnum.Online);
 
             Assert.AreEqual(vehiclesList.Count, 0);
         }
@@ -62,7 +60,7 @@ namespace VTS.Test
 
             Assert.AreEqual(vehiclesList.Count, 1);
 
-            Assert.AreEqual(vehiclesList[0].Vehicles[0].VehicleId, "VLUR4X20009093588");
+            Assert.AreEqual(vehiclesList[0].VIN, "VLUR4X20009093588");
         }
         [TestMethod]
         public void UpdateVehicleStatus_InvalidVehicle()

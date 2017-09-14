@@ -14,12 +14,14 @@ namespace VTS.Repository
     /// <typeparam name="T">Generic entity type</typeparam>
     public interface IRepository<T> where T : class
     {
-        void Insert(T entity);
+        T Insert(T entity);
 
         void Update(T entity);
+
         void Delete(T entity);
-        IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate);
+
         IQueryable<T> GetAll();
-        T GetById(int id);
+
+        T GetById(object id);
     }
 }

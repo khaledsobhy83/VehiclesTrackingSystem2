@@ -26,28 +26,28 @@ namespace VTS.VehicleSimulator
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(_serverIp);
 
-            IPAddress ipAddress = ipHostInfo.AddressList[2];
+            IPAddress ipAddress = IPAddress.Parse(_serverIp);
 
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, _port);
 
             return remoteEP;
         }
 
-        public void Start()
+        public void Start(string vehicleNo)
         {
             TcpClient client = new TcpClient();
 
-            Connect(client);
+            Connect(client, vehicleNo);
 
         }
 
-        private void Connect(TcpClient client)
+        private void Connect(TcpClient client, string vehicleNo)
         {
             try
             {
                 client.Connect(GetServerIP());
                 var stream = client.GetStream();
-                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes("VLUR4X20009093588");
+                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(vehicleNo);
                 stream.Write(bytesToSend, 0, bytesToSend.Length);
                 client.Close();
                 

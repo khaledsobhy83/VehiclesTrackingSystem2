@@ -58,9 +58,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\VTS.BL\VTS.BL.csproj">
       <Project>{18eb19fe-9b57-4d6b-8ef7-ab5c659c3d3f}</Project>
       <Name>VTS.BL</Name>

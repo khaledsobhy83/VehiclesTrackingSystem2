@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VTS.Entity;
 using VTS.Helpers.Enums;
 using VTS.Repository;
@@ -12,6 +10,7 @@ namespace VTS.BL
     public class VehiclesManager : IVehiclesManager
     {
         private IVehicleRepository _vehicleRepository;
+
         public VehiclesManager(IVehicleRepository vehicleRepository)
         {
             _vehicleRepository = vehicleRepository;
@@ -21,27 +20,37 @@ namespace VTS.BL
         /// </summary>
         /// <param name="customerId"> The customer id where vehicle is associated with</param>
         /// <returns>Returns list of vehicles</returns>
-        public List<Customer> GetAllVehicles()
+        public List<Vehicle> GetAllVehicles()
         {
-            return _vehicleRepository.GetAllVehicles();
+            return _vehicleRepository.GetAllVehicles().ToList();
         }
         /// <summary>
         /// Returns vehicles by customer
         /// </summary>
         /// <param name="customerId"> The customer id where vehicle is associated with</param>
         /// <returns>Returns list of vehicles</returns>
-        public List<Customer> GetVehiclesByCustomer(int customerId)
+        public List<Vehicle> GetVehiclesByCustomer(int customerId)
         {
-            return _vehicleRepository.GetVehiclesByCustomer(customerId);
+            return _vehicleRepository.GetVehiclesByCustomer(customerId).ToList();
         }
         /// <summary>
         /// Returns vehicles by status
         /// </summary>
         /// <param name="customerId"> Vehicle status</param>
         /// <returns>Returns list of vehicles</returns>
-        public List<Customer> GetVehiclesByStatus(VehicleStatusEnum status)
+        public List<Vehicle> GetVehiclesByStatus(VehicleStatusEnum status)
         {
-            return _vehicleRepository.GetVehiclesByStatus(status);
+            return _vehicleRepository.GetVehiclesByStatus((int)status).ToList();
+        }
+        /// <summary>
+        /// Returns vehicles for specific customer and status
+        /// </summary>
+        /// <param name="customerId">Customer Id</param>
+        /// <param name="status">Vehicle status</param>
+        /// <returns></returns>
+        public List<Vehicle> SearchVehicles(int customerId, int status)
+        {
+            return _vehicleRepository.SearchVehicles(customerId, status).ToList();
         }
         /// <summary>
         /// Updates spcific vehcile status
@@ -53,12 +62,15 @@ namespace VTS.BL
         {
             try
             {
-                if(_vehicleRepository.GetVehicleById(vehicleId) == null)
+                var vehicle = _vehicleRepository.GetVehicleById(vehicleId);
+
+                if (vehicle == null)
                 {
                     return false;
                 }
+                vehicle.VehicleStatus = (int)status;
 
-                _vehicleRepository.UpdateVehicleStatus(vehicleId, status);
+                _vehicleRepository.UpdateVehicleStatus(vehicle);
 
                 return true;
             }

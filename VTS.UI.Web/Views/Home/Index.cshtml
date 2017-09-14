@@ -1,33 +1,33 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Vehicle Tracing System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div>
     <h1>Vehicle Status Report</h1>
 </div>
-<div>
-    <span>
-        Customer:
-    </span>
-
-    @{ var customers = new List<SelectListItem>();
-        customers.Add(new SelectListItem() { Text = "Kalles Grustransporter AB", Value = "1" });
-        customers.Add(new SelectListItem() { Text = "Johans Bulk AB", Value = "2" });
-        customers.Add(new SelectListItem() { Text = "Haralds Värdetransporter AB", Value = "3" });
-     }
-    @Html.DropDownList("Customers", customers,new { @onchange= "OnCustomerChanged(this.value)" });
-    
-</div>
-<div>
-    <span>Status:</span>
-    <fieldset id="group1">
-        <input type="radio" id="rdOnline" name="group1" value="0">Online
-        <input type="radio" id="rdOffline" name="group1" value="1" />Offline
-        <input type="radio" id="rdAll" name="group1" value="-1" checked="checked" />Both
-    </fieldset>
-</div>
-<table id="tblVehicles">
-
-</table>
-
+<br />
+<br />
+<div class="container">
+    <div class="form-group">
+        <span>
+            Select Customer
+        </span>
+        <select name="RTOListItem" id="DDlCustomers" class="form-control">
+            <option value="-1">Select Customer</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <span>Status</span>
+        <fieldset id="group1">
+            <input type="radio" id="rdOnline" name="group1" value="1">Online
+            <input type="radio" id="rdOffline" name="group1" value="2" />Offline
+            <input type="radio" id="rdAll" name="group1" value="-1" checked="checked" />Both
+        </fieldset>
+    </div>
+    <div class="form-group">
+        <table id="tblVehicles" class="ui-jqgrid-view"></table>
+    </div>
+ </div>
 
